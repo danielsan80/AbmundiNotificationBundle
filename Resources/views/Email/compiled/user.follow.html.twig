@@ -1,0 +1,67 @@
+{% extends 'ABMundiNotificationBundle::mail.html.twig' %}
+
+{% block content %}
+    <!-- subject: "{% trans with {'%name%': mainSubject.name} %}email.user.follow.subject{% endtrans %}" -->
+    <div class="content" style="font-family: arial; margin: 0px; padding: 10px;">
+        {% trans %}Hello{% endtrans %} 
+        {% spaceless %}
+            <a href="{{ url('user_public_profile', { 'username': mainSubject.username }) }}" title="{{ mainSubject.username }}" class="user" style="color: green;" >
+                {% include 'ABMundiUserBundle:Default:_iconuser.html.twig' with {'user': mainSubject, 'filter': 'user_mini'} %} {{ mainSubject.username }}
+            </a>,
+        {% endspaceless %}
+        <br/>
+        {% trans %}there is a piece of news for you{% endtrans %}.
+       
+        <div class="topic" style="background-color: #ffffff; margin: 10px; padding: 10px; border: 1px solid #cccccc;">
+            {% set nActors = notification.actors|length %}
+            <h3>
+                {% transchoice nActors %}
+                    {1} Hai un nuovo follower!|
+                    ]1,Inf] Hai %nActors% nuovi follower!
+                {% endtranschoice %}
+            </h3>
+            <table border="1" cellpadding="5" cellspacing="0" width="100%" style="border: 1px solid #cccccc;">
+                {% for actor in notification.actors %}
+                    
+                    {% set user = actor.user %}
+                    <tr>
+                        <td width="20%" rowspan="2" style="border: 1px solid #cccccc;">
+                            <a href="{{ url('user_public_profile', { 'username': user.username }) }}" title="{{ user.username }}" style="color: green;">
+                                {% include 'ABMundiUserBundle:Default:_iconuser.html.twig' with {'user': user, 'filter': 'user_small'} %}
+                                {{ user.name }}
+                            </a>
+                        </td>
+                        <td style="border: 1px solid #cccccc;">
+                            Followers: {{ user.followers|length }}
+                        </td>
+                        <td style="border: 1px solid #cccccc;">
+                            {% trans %}label.Started goals{% endtrans %}: {{ user.publicJourneys|length }}
+                        </td>
+                        <td style="border: 1px solid #cccccc;">
+                            {% trans %}label.Closed goals{% endtrans %}: {{ user.publicStories|length }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="border: 1px solid #cccccc;">
+                            {% for goal in user.journeys %}
+                                <h4>
+                                    <a href="{{ url('goal_show', { 'username': user.username, 'slug': goal.slug }) }}"  style="color: green;">
+                                        {{ goal.name }}
+                                    </a>
+                                </h4>
+                                {{ goal.percentage }}%, 
+                                {{ goal.cheers|length }} {% trans %}cheers{% endtrans %}, 
+                                {% trans %}expires in{% endtrans %} {{ goal.expireAt|timefromnow }}
+                                {% if not loop.last %}
+                                    <hr />
+                                {% endif %}
+                            {% else %}
+                                {% trans %}no journey started{% endtrans %}
+                            {% endfor %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}

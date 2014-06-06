@@ -1,0 +1,37 @@
+{% extends 'ABMundiNotificationBundle::mail.html.twig' %}
+
+{% block content %}
+    <style>
+    </style>
+    <!-- subject: "{% trans %}email.goal.congrats.subject{% endtrans %} {{mainSubject.name}}" -->
+    <div class="content">
+        {% trans %}Hello{% endtrans %}  
+        {% spaceless %}
+        <a href="{{ url('user_public_profile', { 'username': mainSubject.owner.username }) }}" title="{{ mainSubject.owner.username }}" class="user">
+            {% include 'ABMundiUserBundle:Default:_iconuser.html.twig' with {'user': mainSubject.owner, 'filter': 'user_mini'} %} {{ mainSubject.owner.username }}
+        </a>,
+        {% endspaceless %}
+        
+        {% trans %}there are news for you{% endtrans %}.
+        <div class="topic">
+            {% for actor in notification.actors %}
+                {% set actor = actor.user %}
+                
+                {% if actor %}
+                    <a href="{{ url('user_public_profile', { 'username': actor.username }) }}" title="{{ actor.username }}">
+                        {% include 'ABMundiUserBundle:Default:_iconuser.html.twig' with {'user': actor, 'filter': 'user_small'} %} 
+                        {{ actor.username }}
+                    </a>
+                {% endif %}
+            {% endfor %}
+
+            {% trans %}congratulates with you for your goal{% endtrans %} 
+
+            <a href="{{ url('goal_show', { 'username': mainSubject.owner.username, 'slug': mainSubject.slug }) }}">
+                {{mainSubject.name}}
+            </a>
+            <hr />
+            {% trans with {'%numCongrats%': mainSubject.congrats|length} %}email.goal.congrats.text{% endtrans %}
+        </div>
+    <div>
+{% endblock %}

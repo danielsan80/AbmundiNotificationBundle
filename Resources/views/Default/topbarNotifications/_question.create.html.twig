@@ -1,0 +1,15 @@
+{% extends 'ABMundiNotificationBundle:Default:topbarNotifications/_default.html.twig' %}
+
+{% block url %}{{path('question_show', { 'id': notification.lastEvent.subject.id })}}{% endblock %}
+
+{% block message %}
+    {% set event = notification.lastEvent %}
+    {% set question = event.subject %}
+
+    <b>{{ event.actor.username }}</b>
+
+    {% trans %}asked{% endtrans %}
+
+    <b>{{question.title}}</b>
+
+{% endblock %}

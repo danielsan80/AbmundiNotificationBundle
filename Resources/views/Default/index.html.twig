@@ -1,0 +1,27 @@
+{% extends 'ABMundiNotificationBundle::application_1col.html.twig' %}
+
+{% block flash %}
+    {{ parent() }}
+    {% if app.session.flash('notice') %}
+        <div class="alert">
+            <a class="close" href="#" data-dismiss="alert">×</a>
+            {{ app.session.flash('notice') }}
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block main %}
+    <div id="top" class="well">
+        <h1>{% trans %}Notifications{% endtrans %}</h1>
+    </div>
+
+    <div id="mainbig" class="well well-small">
+        {% for notification in notifications %}
+            {% render "ABMundiNotificationBundle:Default:notification" with {'notification': notification} %}
+            {% if not loop.last %}
+                <hr />
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}
+

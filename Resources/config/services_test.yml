@@ -1,0 +1,17 @@
+services:
+
+    abm_notification.test.leezy.pheanstalk:
+        class: ABMundi\NotificationBundle\Test\Pheanstalk\Pheanstalk
+        
+    abm_notification.event.manager:
+        class: ABMundi\NotificationBundle\Entity\EventManager
+        calls:
+            - [ setEntityManager, [ @doctrine.orm.entity_manager ] ]
+            - [ setPheanstalk, [ @abm_notification.test.leezy.pheanstalk ] ]
+
+    abm_notification.notification.manager:
+        class: ABMundi\NotificationBundle\Entity\NotificationManager
+        arguments: [@service_container]
+        calls:
+            - [ setPheanstalk, [ @abm_notification.test.leezy.pheanstalk ] ]
+            - [ setEntityManager, [ @doctrine.orm.entity_manager ] ]

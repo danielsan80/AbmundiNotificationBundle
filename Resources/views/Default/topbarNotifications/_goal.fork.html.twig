@@ -1,0 +1,19 @@
+{% extends 'ABMundiNotificationBundle:Default:topbarNotifications/_default.html.twig' %}
+
+{% block url %}{{path('goal_show', { 'username': notification.lastEvent.subject.owner.username, 'slug': notification.lastEvent.subject.slug })}}{% endblock %}
+
+{% block message %}
+
+    {% set event = notification.lastEvent %}
+
+    <b>{{ event.actor.username }}</b>
+
+    {% trans %}created{% endtrans %} 
+
+    <b>{{event.subject.name}}</b>
+    
+    {% trans %}forking your goal{% endtrans %} 
+  
+    <b>{{event.subject.parent.name}}</b>
+
+{% endblock %}

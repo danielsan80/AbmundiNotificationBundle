@@ -1,0 +1,81 @@
+ago: fa
+Someone: Qualcuno
+cheers: I daje
+expires in: scade tra
+cheered: ha tifato
+asked: ha chiesto
+times: volte
+you: te
+
+closed his goal: ha chiuso il suo progetto
+with x% of completion: al %percentage%%
+reached x% on: ha raggiunto il %percentage%% di
+
+commented your goal: ha commentato il tuo goal
+is happy for your goal: è felice per il tuo progetto
+congratulates with you for your goal: si congratula con te per il tuo progetto
+
+cheered your goal: ha fatto daje! sul tuo goal
+
+asked a question: ha fatto una domanda
+asked the question: ha posto la domanda
+on his goal: sul suo goal
+
+created a new goal: ha avuto una nuova idea
+started a new journey: ha iniziato un nuovo progetto
+
+created: ha creato
+started: ha avviato
+forking your goal: forkando il tuo goal
+
+added a note on his goal: ha aggiunto una nota al suo progetto
+
+started to follow: ha inziato a seguire
+started to follow you: ha iniziato a <b>seguirti</b>
+
+Notifications: Notifiche
+Read all notifications: Leggi tutte le notifiche
+
+Hello: Ciao
+there are news for you: abbiamo buone notizie per te
+there is a piece of news for you: abbiamo un'altra buona notizia per te
+maybe you might be interested: forse potrebbe interessarti
+You can help him: Forse hai la risposta che cerca
+        
+no goal started: non ci sono progetti avviati!
+You have new followers: "{1} Hai un nuovo follower! | ]1,Inf] Hai %count% nuovi follower!"
+
+email:
+  reminder:
+    subject: I tuoi progetti hanno bisogno di te
+    text: come procedono i tuoi goal? Sappiamo che ci stai lavorando sodo e che non hai bisogno di questo memo.<br /> Ma come ben sai a noi ci piace stare in contatto con voi, per cui abbi pazienza.
+  goal:
+    cheer:
+      subject: Hai un nuovo daje! sul tuo goal
+      text: |
+        Un piccolo incoraggiamento può fare la differenza, non è vero?<br />
+        Ora hai totalizzato la bellezza di <b>%numCheers% daje!</b>.<br /><br />
+        DAJE!
+    congrats:
+      subject: Un utente si congratula con te per il tuo progetto
+      text: |
+        Condividere la vittoria o la sconfitta è importante, giusto?<br />
+        Ben <b>%numCongrats%</b> utenti si sono congratulati con te.<br /><br />
+        DAJE!
+    close:
+      subject: Un utente di quelli che stai seguendo ha chiuso un progetto
+  user:
+    follow:
+      subject: Hey %name%, qualcuno ha iniziato a seguirti!
+  question:
+    create:
+      subject: Hey %name%, un amico ha bisogno di te! Puoi aiutarlo?
+
+  disclaimer: |
+    Ti preghiamo di non rispondere a questo messaggio; è stato inviato da un indirizzo email non monitorato. Questo messaggio è una email di servizio relativo all'utilizzo di ABMundi. Per richieste di carattere generale oppure per richieste di supporto riguardo al tuo account ABMundi ti preghiamo di contattarci all'indirizzo info@abmundi.com.<br /> 
+    Se vuoi puoi modificare <a href="http://abmundi.com/profile/email">le tue preferenze</a>.
+    Grazie!
+
+label:
+  Started goals: Progetti avviati
+  Closed goals: Progetti chiusi

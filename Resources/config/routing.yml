@@ -1,0 +1,3 @@
+notification:
+    resource: "@ABMundiNotificationBundle/Controller"
+    type: annotation

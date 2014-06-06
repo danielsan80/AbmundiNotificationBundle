@@ -1,0 +1,46 @@
+parameters:
+    abm_notification.emails.from.email: ~
+    abm_notification.emails.from.name: ~
+    abm_notification.emails.debug.email: ~
+    abm_notification.emails.debug.name: ~
+
+services:
+        
+    abm_notification.event.manager:
+        class: ABMundi\NotificationBundle\Entity\EventManager
+        calls:
+            - [ setEntityManager, [ @doctrine.orm.entity_manager ] ]
+            - [ setPheanstalk, [ @leezy.pheanstalk ] ]
+
+    abm_notification.notification.manager:
+        class: ABMundi\NotificationBundle\Entity\NotificationManager
+        calls:
+            - [ setPheanstalk, [ @leezy.pheanstalk ] ]
+            - [ setEntityManager, [ @doctrine.orm.entity_manager ] ]
+ 
+    abm_notification.email.manager:
+        class: ABMundi\NotificationBundle\Entity\EmailManager
+        calls:
+            - [ setPheanstalk, [ @leezy.pheanstalk ] ]
+            - [ setEntityManager, [ @doctrine.orm.entity_manager ] ]
+            - [ setTemplating, [ @templating ] ]
+            - [ setMailer, [ @mailer ] ]
+            - [ setFromEmail, [ %abm_notification.emails.from.email%, %abm_notification.emails.from.name% ] ]
+            - [ setDebugEmail, [ %abm_notification.emails.debug.email%, %abm_notification.emails.debug.name% ] ]
+ 
+    abm_notification.facebook.manager:
+        class: ABMundi\NotificationBundle\Entity\FacebookManager
+        calls:
+            - [ setPheanstalk, [ @leezy.pheanstalk ] ]
+            - [ setEntityManager, [ @doctrine.orm.entity_manager ] ]
+            - [ setFacebookUserProvider, [ @my.facebook.user ] ]
+            - [ setNamespace, [ "abmundi" ] ]
+            - [ setRouter, [ @router ] ]
+            - [ setKernel, [ @kernel ] ]
+
+    abm_notification.event.listener:
+        class: ABMundi\NotificationBundle\Entity\EventListener
+        arguments: [@service_container]
+        public: false
+        tags:
+            -  { name: doctrine.event_subscriber}

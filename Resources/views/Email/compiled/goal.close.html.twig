@@ -1,0 +1,37 @@
+{% extends 'ABMundiNotificationBundle::mail.html.twig' %}
+
+{% set event = notification.events[0] %}
+{% set goal = event.subject %}
+
+{% block content %}
+    <style>
+    </style>
+    <!-- subject: "{% trans %}email.goal.close.subject{% endtrans %}: {{goal.name}}" -->
+    <div class="content">
+        {% trans %}Hello{% endtrans %}  
+        {% spaceless %}
+        <a href="{{ url('user_public_profile', { 'username': notification.user.username }) }}" title="{{ notification.user.username }}" class="user" style="color: green;" >
+            {% include 'ABMundiUserBundle:Default:_iconuser.html.twig' with {'user': notification.user, 'filter': 'user_mini'} %} {{ notification.user.username }}
+        </a>,
+        {% endspaceless %}
+        
+        {% trans %}maybe you might be interested{% endtrans %}
+        <div class="topic" style="background-color: #ffffff; margin: 10px; padding: 10px; border: 1px solid #cccccc;">
+            {% for actor in notification.actors %}
+                {% set actor = actor.user %}
+                
+                <a href="{{ url('user_public_profile', { 'username': actor.username }) }}" title="{{ actor.username }}" style="color: green;" >
+                    {% include 'ABMundiUserBundle:Default:_iconuser.html.twig' with {'user': actor, 'filter': 'user_small'} %} 
+                    {{ actor.username }}
+                </a>
+            {% endfor %}
+
+            {% trans %}closed his goal{% endtrans %} 
+
+            <a href="{{ url('goal_show', { 'username': goal.owner.username, 'slug': goal.slug }) }}" style="color: green;">
+                {{goal.name}}
+            </a>
+            {% trans with {'%percentage%': goal.percentage} %}with x% of completion{% endtrans %}
+        </div>
+    <div>
+{% endblock %}

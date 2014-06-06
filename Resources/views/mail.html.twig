@@ -1,0 +1,25 @@
+<html>
+<body>
+    <style>
+            html,body { margin: 0px; padding: 0px; }
+            body{ padding: 10px; font-family: arial; }
+            a{ color: green; }
+            .disclaimer{font-size: 0.8em; color: #aaaaaa; }
+            hr{ display: block; height: 1px; border: 0; border-top: 1px solid #eeeeee; margin: 1em 0; padding: 0; }
+            .topic{ border: 1px solid #cccccc; padding: 10px; margin: 10px; background-color:#ffffff; } 
+    </style>
+    <a href="http://abmundi.com" alt="Abmundi" title="Abmundi">
+        <img src="{{ 'http://' ~ app.request.host ~ asset('bundles/abmundinotification/images/logo.png') }}" alt="Abmundi" title="Abmundi" border="0" />
+    </a>
+    <hr />
+    <!-- init content -->
+    {% block content %}{% endblock %}
+    <!-- end content -->
+    <hr />
+    <div class="disclaimer">
+        <a href="http://abmundi.com/">abmundi.com</a>.
+        {% trans %}email.disclaimer{% endtrans %}
+        <br />
+    </div>
+</body>
+</html>

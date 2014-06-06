@@ -1,0 +1,23 @@
+{% extends 'ABMundiNotificationBundle:Default:topbarNotifications/_default.html.twig' %}
+
+
+{% block url %}{% spaceless %}
+{% for actor in notification.actors %}
+    {% if loop.first %}
+        {% set actor = actor.user %}
+        {{ path('user_public_profile', { 'username': actor.username }) }}
+    {% endif %}
+{% endfor %}
+{% endspaceless %}{% endblock %}
+
+{% block message %}
+
+    {% for actor in notification.actors %}
+        {% set actor = actor.user %}
+            <b>{{ actor.username }}</b>
+        {% if not loop.last %}, {% endif %}
+    {% endfor %}
+
+    {% trans %}started to follow you{% endtrans %}
+
+{% endblock %}

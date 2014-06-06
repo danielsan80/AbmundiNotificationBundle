@@ -1,0 +1,38 @@
+{% extends 'ABMundiNotificationBundle::mail.html.twig' %}
+
+{% block content %}
+    <!-- subject: "{% trans %}email.goal.cheer.subject{% endtrans %} - {{ mainSubject.name }}" -->
+    <div class="content" style="font-family: arial; margin: 0px; padding: 10px;">
+        {% trans %}Hello{% endtrans %}
+        {% spaceless %}
+        <a href="{{ url('user_public_profile', { 'username': mainSubject.owner.username }) }}" title="{{ mainSubject.owner.username }}" class="user"  style="color: green;">
+            {% include 'ABMundiUserBundle:Default:_iconuser.html.twig' with {'user': mainSubject.owner, 'filter': 'user_mini'} %} {{ mainSubject.owner.username }}
+        </a>,
+        {% endspaceless %}
+        <br/>
+        
+        {% trans %}there are news for you{% endtrans %}.
+        <div class="topic" style="background-color: #ffffff; margin: 10px; padding: 10px; border: 1px solid #cccccc;">
+            <p>
+            {% for actor in notification.actors %}
+                {% set actor = actor.user %}
+                {% if actor %}
+                    <a href="{{ url('user_public_profile', { 'username': actor.username }) }}" title="{{ actor.username }}" class="thumb"  style="color: green; vertical-align: bottom;">
+                        {% include 'ABMundiUserBundle:Default:_iconuser.html.twig' with {'user': actor, 'filter': 'user_small'} %}
+                        {{ actor.username }}
+                    </a>
+                {% else %}{% trans %}Someone{% endtrans %}{% endif %}
+            {% endfor %}
+                
+            <i>{{ notification.createdAt|timefromnow }} {% trans %}ago{% endtrans %}</i>
+
+            {% trans %}cheered your goal{% endtrans %}
+
+            <a href="{{ url('goal_show', { 'username': mainSubject.owner.username, 'slug': mainSubject.slug }) }}"  style="color: green;">
+                {{mainSubject.name}}
+            </a>
+            </p>
+            {% trans with {'%numCheers%': mainSubject.cheers|length} %}email.goal.cheer.text{% endtrans %}
+        </div>
+    </div>
+{% endblock %}

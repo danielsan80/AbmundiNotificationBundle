@@ -1,0 +1,33 @@
+{% extends 'ABMundiNotificationBundle::mail.html.twig' %}
+
+{% block content %}
+    <style>
+        h4{ margin: 0.5em 0;}
+    </style>
+    <!-- subject: "{% trans %}email.reminder.subject{% endtrans %}, {{ user.name }}" -->
+    <div class="content">
+        {% trans %}Hello{% endtrans %}   
+        {% spaceless %}
+        <a href="{{ url('user_public_profile', { 'username': user.username }) }}" title="{{ user.username }}" class="user">
+            {% include 'ABMundiUserBundle:Default:_iconuser.html.twig' with {'user': user, 'filter': 'user_mini'} %} {{ user.username }}
+        </a>,
+        {% endspaceless %}
+        <br/>
+        {% trans %}email.reminder.text{% endtrans %}
+        <div class="topic">
+            {% for goal in goals %}
+                <h4>
+                    <a href="{{ url('goal_show', { 'username': user.username, 'slug': goal.slug }) }}">
+                        {{ goal.name }}
+                    </a>
+                </h4>
+                {{ goal.percentage }} %, 
+                {{ goal.cheers|length }} {% trans %}cheers{% endtrans %}, 
+                {% trans %}expires in{% endtrans %} {{ goal.expireAt|timefromnow }}
+                {% if not loop.last %}
+                    <hr />
+                {% endif %}
+            {% endfor %}
+        </div>
+    <div>
+{% endblock %}

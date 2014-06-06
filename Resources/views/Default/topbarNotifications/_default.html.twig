@@ -1,0 +1,27 @@
+<a href="{% block url %}{{path('notification_index')}}{% endblock %}" title="{{ notification.events.last.actor.username }}">
+   <div class="row-fluid">
+        <div class="span2">
+            {% set actor = notification.lastEvent.actor %}
+            {% if actor %}
+                {% include 'ABMundiUserBundle:Default:_iconuser.html.twig' with {'user': actor, 'filter': 'user_mini'} %}
+            {% else %}{% trans %}Someone{% endtrans %}{% endif %}
+        </div>
+        <div class="span10">
+            {% autoescape false %}
+            {% block message %}    
+                {% for actor in notification.actors %}
+                    {% set times = actor.times %}
+                    {% set actor = actor.user %}
+                    {% if actor %}
+                        {{ actor.username }}
+                    {% else %}{% trans %}Someone{% endtrans %}{% endif %}
+                    {% if not loop.last %}, {% endif %}
+                {% endfor %}
+                {{notification.lastEvent.verb}}
+                {{notification.lastEvent.subject}}
+            {% endblock %}
+            {% endautoescape %}
+        </div>
+    </div>
+</a>
+           

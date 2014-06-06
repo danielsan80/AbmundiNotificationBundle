@@ -1,0 +1,18 @@
+{{ notification.createdAt|timefromnow }} {% trans %}ago{% endtrans %} 
+
+{% set event = notification.events[0] %}
+
+<a href="{{ path('user_public_profile', { 'username': event.actor.username }) }}" title="{{ event.actor.username }}">
+    {% include 'ABMundiUserBundle:Default:_iconuser.html.twig' with {'user': event.actor, 'filter': 'user_mini'} %}
+</a>
+<a href="{{ path('user_public_profile', { 'username': event.actor.username }) }}" title="{{ event.actor.username }}">{{ event.actor.username }}</a>
+
+{% trans %}created{% endtrans %} 
+
+<a href="{{ path('goal_show', { 'username': event.actor.username, 'slug': event.subject.slug }) }}">
+    {{event.subject.name}}
+</a>
+{% trans %}forking your goal{% endtrans %} 
+<a href="{{ path('goal_show', { 'username': event.subject.parent.owner.username, 'slug': event.subject.parent.slug }) }}">
+    {{event.subject.parent.name}}
+</a>

@@ -1,0 +1,40 @@
+{% javascripts
+    'bundles/abmundidesign/js/read-all-notifications.js'
+%}
+    <script type="text/javascript">
+        var read_all_notifications_url = '{{ path('read_all_notifications') }}';
+    </script>
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+
+<li class="dropdown" id="notification-menu">
+    <a href="#"
+        class="dropdown-toggle notifications"
+        data-toggle="dropdown">
+            <span class="icon-globe icon-white"></span>
+            {% if num_unread_notifications %}
+                <span class="count">{{ num_unread_notifications }}</span>
+            {% endif %}
+        <b class="caret"></b>
+    </a>
+    <ul class="dropdown-menu">
+        <!-- only for test purpose -->
+        <div class="hide">
+            <form action="{{ path('read_all_notifications') }}" method="POST" class="read_all_notifications">
+                <input type="submit" value="read_all_notifications" />
+            </form>
+        </div>
+
+        {% for notification in latest_notifications %}
+            <li>
+                {% render "ABMundiNotificationBundle:Default:topbarNotification" with {'notification': notification} %}
+            </li>
+        {% endfor %}
+        <li class="divider"></li>
+        <li class="readall">
+            <a href="{{ path('notification_index') }}">
+                {% trans %}Read all notifications{% endtrans %}
+            </a>
+        </li>
+    </ul>
+</li>

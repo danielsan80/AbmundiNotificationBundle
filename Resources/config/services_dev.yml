@@ -1,0 +1,11 @@
+services:
+ 
+    abm_notification.facebook.manager:
+        class: ABMundi\NotificationBundle\Entity\FacebookManager
+        calls:
+            - [ setPheanstalk, [ @leezy.pheanstalk ] ]
+            - [ setEntityManager, [ @doctrine.orm.entity_manager ] ]
+            - [ setFacebookUserProvider, [ @my.facebook.user ] ]
+            - [ setNamespace, [ "abmundidev" ] ]
+            - [ setRouter, [ @router ] ]
+            - [ setKernel, [ @kernel ] ]

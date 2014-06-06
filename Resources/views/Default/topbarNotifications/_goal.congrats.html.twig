@@ -1,0 +1,20 @@
+{% extends 'ABMundiNotificationBundle:Default:topbarNotifications/_default.html.twig' %}
+
+{% block url %}{{path('goal_show', { 'username': notification.lastEvent.subject.owner.username, 'slug': notification.lastEvent.subject.slug })}}{% endblock %}
+
+{% block message %}
+
+    {% for actor in notification.actors %}
+        {% set times = actor.times %}
+        {% set actor = actor.user %}
+        {% if actor %}
+            <b>{{ actor.username }}</b>
+        {% else %}<b>{% trans %}Someone{% endtrans %}</b>{% endif %}
+        {% if times>1 %}({{times}} {% trans %}times{% endtrans %}){% endif %}
+        {% if not loop.last %}, {% endif %}
+    {% endfor %}
+
+    {% trans %}is happy for your goal{% endtrans %} 
+
+    <b>{{notification.lastEvent.subject.name}}</b>
+{% endblock %}

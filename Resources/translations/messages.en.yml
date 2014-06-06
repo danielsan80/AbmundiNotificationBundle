@@ -1,0 +1,81 @@
+ago: ago
+Someone: Someone
+cheers: cheers
+expires in: expires in
+cheered: cheered
+asked: asked
+times: times
+you: you
+
+closed his goal: closed his journey
+with x% of completion: with %percentage%% of completion
+reached x% on: reached %percentage%% on
+
+commented your goal: commented your goal
+is happy for your goal: is happy for your journey
+congratulates with you  for your goal: si congratula con te per il tuo journey
+
+cheered your goal: cheered your goal
+
+asked a question: asked a question
+asked the question: ha posto la domanda
+on his goal: sul suo goal
+
+created a new goal: had a new idea
+started a new journey: started a new journey
+
+created: created
+started: started
+forking your goal: forking your goal
+
+added a note on his goal: added a note on his journey
+
+started to follow: started to follow
+started to follow you: started to follow <b>you</b>
+
+Notifications: Notifications
+Read all notifications: Read all notifications
+
+Hello: Ciao
+there are news for you: abbiamo buone notizie per te
+there is a piece of news for you: abbiamo un'altra buona notizia per te
+maybe you might be interested: forse potrebbe interessarti
+you can help him: forse hai la risposta che cerca
+
+no goal started: no journey started!
+You have new followers: "{1} Hai un nuovo follower! | ]1,Inf] Hai %count% nuovi follower!"
+
+email:
+  reminder:
+    subject: Your journeys need you
+    text: come procedono i tuoi obiettivi? Sappiamo che ci stai lavorando sodo e che non hai bisogno di questo memo.<br /> Ma come ben sai a noi ci piace stare in contatto con voi, per cui abbi pazienza.
+  goal:
+    cheer:
+      subject: You got a new cheer on your goal
+      text: |
+        Un piccolo incoraggiamento può fare la differenza, non è vero?<br />
+        Ora hai totalizzato la bellezza di <b>%numCheers% cheers</b>.<br /><br />
+        DAJE!
+    congrats:
+      subject: A user congratulates for your journey
+      text: |
+        Condividere la vittoria o la sconfitta è importante, giusto?<br />
+        Ben <b>%numCongrats%</b> utenti si sono congratulati con te.<br /><br />
+        DAJE!
+    close:
+      subject: One of your followins closed a journey
+  user:
+    follow:
+      subject: Hey %name%, someone started to follow you!
+  question:
+    create:
+      subject: Hey %name%, one of your friends need you! Can you help him?
+      
+  disclaimer: |
+    Please do not reply to this message; it was sent from an unmonitored email address. This message is a service email related to your use of Abmundi. For general inquiries or to request support with your Abmundi account, please contact us at info@abmundi.com.<br /> 
+    If you want you can change <a href="http://abmundi.com/profile/email">your preferences</a>.
+    Thank you!
+        
+label:
+  Started goals: Started journeys
+  Closed goals: Closed journeys

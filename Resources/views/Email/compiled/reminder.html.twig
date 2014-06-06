@@ -1,0 +1,30 @@
+{% extends 'ABMundiNotificationBundle::mail.html.twig' %}
+
+{% block content %}
+    <!-- subject: "{% trans %}email.reminder.subject{% endtrans %}, {{ user.name }}" -->
+    <div class="content" style="font-family: arial; margin: 0px; padding: 10px;">
+        {% trans %}Hello{% endtrans %}
+        {% spaceless %}
+        <a href="{{ url('user_public_profile', { 'username': user.username }) }}" title="{{ user.username }}" class="user" style="color: green;">
+            {% include 'ABMundiUserBundle:Default:_iconuser.html.twig' with {'user': user, 'filter': 'user_mini'} %} {{ user.username }}
+        </a>,
+        {% endspaceless %}
+        <br/>
+        {% trans %}email.reminder.text{% endtrans %}
+        <div class="topic" style="background-color: #ffffff; margin: 10px; padding: 10px; border: 1px solid #cccccc;">
+            {% for goal in goals %}
+                <h4 style="margin: 0.5em 0;">
+                    <a href="{{ url('goal_show', { 'username': user.username, 'slug': goal.slug }) }}" style="color: green;">
+                        {{ goal.name }}
+                    </a>
+                </h4>
+                {{ goal.percentage }} %, 
+                {{ goal.cheers|length }} {% trans %}cheers{% endtrans %}, 
+                {% trans %}expires in{% endtrans %} {{ goal.expireAt|timefromnow }}
+                {% if not loop.last %}
+                    <hr style="display: block; height: 1px; border-top-style: solid; border-top-color: #eeeeee; margin: 1em 0; padding: 0; border-width: 1px 0 0;"/>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

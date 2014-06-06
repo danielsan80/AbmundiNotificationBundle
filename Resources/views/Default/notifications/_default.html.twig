@@ -1,0 +1,18 @@
+{{ notification.createdAt|timefromnow }} {% trans %}ago{% endtrans %}
+
+{% for actor in notification.actors %}
+    {% set times = actor.times %}
+    {% set actor = actor.user %}
+    {% if actor %}
+        <a href="{{ path('user_public_profile', { 'username': actor.username }) }}" title="{{ actor.username }}">
+            {% include 'ABMundiUserBundle:Default:_iconuser.html.twig' with {'user': actor, 'filter': 'user_mini'} %}
+        </a>
+        <a href="{{ path('user_public_profile', { 'username': actor.username }) }}" title="{{ actor.username }}">{{ actor.username }}</a>
+    {% else %}{% trans %}Someone{% endtrans %}{% endif %}
+    {% if not loop.last %}, {% endif %}
+{% endfor %}
+
+    {{notification.event.verb}}
+
+    {{notification.event.subject.name}}
+           

@@ -1,0 +1,15 @@
+{{ notification.createdAt|timefromnow }} {% trans %}ago{% endtrans %}
+
+{% set event = notification.events[0] %}
+{% set goal = event.subject %}
+
+<a href="{{ path('user_public_profile', { 'username': event.actor.username }) }}" title="{{ event.actor.username }}">
+    {% include 'ABMundiUserBundle:Default:_iconuser.html.twig' with {'user': event.actor, 'filter': 'user_mini'} %}
+</a>
+<a href="{{ path('user_public_profile', { 'username': event.actor.username }) }}" title="{{ event.actor.username }}">{{ event.actor.username }}</a>
+
+{% trans %}had a new idea{% endtrans %}:
+
+<a href="{{ path('goal_show', { 'username': goal.owner.username, 'slug': goal.slug }) }}">
+    {{goal.name}}
+</a>

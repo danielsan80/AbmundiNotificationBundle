@@ -1,0 +1,17 @@
+{% extends 'ABMundiNotificationBundle:Default:topbarNotifications/_default.html.twig' %}
+
+{% block url %}{{path('goal_show', { 'username': notification.lastEvent.subject.owner.username, 'slug': notification.lastEvent.subject.slug })}}{% endblock %}
+
+{% block message %}
+    {% set event = notification.lastEvent %}
+    {% set goal = event.subject %}
+
+    <b>{{ event.actor.username }}</b>
+
+    {% trans %}closed his goal{% endtrans %}
+    
+
+    <b>{{goal.name}}</b>
+
+    {% trans with {'%percentage%': goal.percentage} %}with x% of completion{% endtrans %}
+{% endblock %}
